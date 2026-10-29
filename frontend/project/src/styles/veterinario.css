@@ -1,0 +1,466 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+:root {
+    --vet-morado-oscuro: #3b1a8f;
+    --vet-morado: #5b21b6;
+    --vet-morado-claro: #7c4dcc;
+    --vet-vino: #8a3a3f;
+    --vet-azul: #3b5bb5;
+    --vet-violeta: #7a52c7;
+    --vet-fondo: #eef0f9;
+    --vet-texto: #111827;
+    --vet-texto-suave: #4b5563;
+    --vet-borde: #d1d5db;
+}
+
+.vet-app {
+    min-height: 100vh;
+    background: var(--vet-fondo);
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+    color: var(--vet-texto);
+}
+
+.vet-app * {
+    box-sizing: border-box;
+}
+
+/* ---------- Encabezado ---------- */
+.vet-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 28px 32px 0;
+    min-height: 112px;
+    color: #fff;
+    background:
+        radial-gradient(circle at 12% 30%, rgba(255, 255, 255, 0.12) 0 2px, transparent 3px) 0 0 / 22px 22px,
+        linear-gradient(120deg, #2e1572 0%, #4c1fa6 55%, #5b2bbd 100%);
+}
+
+.vet-header-izq {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding-bottom: 28px;
+}
+
+.vet-header h1 {
+    margin: 0;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-weight: 700;
+    letter-spacing: 0.01em;
+}
+
+.vet-icono-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    color: #fff;
+    background: transparent;
+    border: 0;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.vet-icono-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.vet-icono-btn:focus-visible,
+.vet-boton:focus-visible,
+.vet-fila:focus-visible,
+.vet-calendario-icono:focus-visible {
+    outline: 3px solid #f5b942;
+    outline-offset: 2px;
+}
+
+.vet-pestana {
+    align-self: flex-end;
+    padding: 14px 28px 10px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    background: rgba(255, 255, 255, 0.14);
+    border-bottom: 5px solid #8f6ae0;
+}
+
+/* ---------- Bloque calendario ---------- */
+.vet-calendario {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    padding: 28px 24px;
+    background: #fff;
+    border-bottom: 2px solid #d9dbe6;
+    flex-wrap: wrap;
+}
+
+.vet-calendario-icono {
+    width: 114px;
+    padding: 0;
+    overflow: hidden;
+    text-align: center;
+    background: #fff;
+    border: 2px solid #c4c7d0;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.vet-calendario-icono .mes {
+    display: block;
+    padding: 6px 0 2px;
+    font-size: 1.1rem;
+    color: var(--vet-texto-suave);
+    border-top: 14px solid var(--vet-morado);
+}
+
+.vet-calendario-icono .dia {
+    display: block;
+    padding-bottom: 8px;
+    font-size: 2.8rem;
+    line-height: 1.1;
+    color: #374151;
+}
+
+.vet-calendario-texto {
+    max-width: 560px;
+    padding-left: 28px;
+    border-left: 2px solid #374151;
+}
+
+.vet-calendario-texto h2 {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.vet-calendario-texto h3 {
+    margin: 4px 0 10px;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #6b7280;
+}
+
+.vet-calendario-texto p {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+/* ---------- Contenido ---------- */
+.vet-contenido {
+    width: min(1040px, 100%);
+    margin: 0 auto;
+    padding: 40px 24px 56px;
+}
+
+.vet-titulo-pagina {
+    margin: 0 0 24px;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.vet-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 36px 56px;
+}
+
+/* ---------- Tarjetas ---------- */
+.vet-tarjeta {
+    --color: var(--vet-morado);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 16px 20px 18px;
+    background: #fff;
+    border-left: 12px solid var(--color);
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(30, 20, 80, 0.12);
+}
+
+.vet-tarjeta h2 {
+    margin: 0;
+    padding-bottom: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-bottom: 1px solid #6b7280;
+    color: #111827; 
+}
+
+.vet-tarjeta-cuerpo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+}
+
+.vet-tarjeta-cuerpo p {
+    margin: 0;
+    font-size: 0.78rem;
+    line-height: 1.45;
+}
+
+.vet-tarjeta.registrar { --color: #5a0fd0; }
+.vet-tarjeta.consultar { --color: var(--vet-vino); }
+.vet-tarjeta.cliente { --color: var(--vet-azul); }
+.vet-tarjeta.receta { --color: var(--vet-violeta); }
+
+/* ---------- Botones ---------- */
+.vet-boton {
+    flex-shrink: 0;
+    padding: 10px 18px;
+    font-family: inherit;
+    font-size: 0.85rem;
+    color: var(--color, var(--vet-morado));
+    background: #fff;
+    border: 2px solid var(--color, var(--vet-morado));
+    border-radius: 10px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.15s, color 0.15s;
+}
+
+.vet-boton:hover {
+    color: #fff;
+    background: var(--color, var(--vet-morado));
+}
+
+.vet-boton.solido {
+    color: #fff;
+    background: var(--vet-morado);
+}
+
+.vet-boton.solido:hover {
+    background: var(--vet-morado-oscuro);
+}
+
+/* ---------- Formularios ---------- */
+.vet-formulario {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 24px;
+    background: #fff;
+    border-left: 12px solid var(--vet-morado);
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(30, 20, 80, 0.12);
+    margin-bottom: 28px;
+}
+
+.vet-formulario label {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.vet-formulario input,
+.vet-formulario select,
+.vet-formulario textarea {
+    padding: 10px 12px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    color: var(--vet-texto);
+    background: #fff;
+    border: 1px solid var(--vet-borde);
+    border-radius: 8px;
+}
+
+.vet-formulario textarea {
+    min-height: 90px;
+    resize: vertical;
+}
+
+.vet-formulario input:focus,
+.vet-formulario select:focus,
+.vet-formulario textarea:focus {
+    outline: 2px solid var(--vet-morado-claro);
+    border-color: transparent;
+}
+
+.vet-fila-campos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+}
+
+.vet-formulario .vet-boton {
+    align-self: flex-start;
+}
+
+.vet-aviso {
+    margin: 0;
+    padding: 12px 16px;
+    font-size: 0.9rem;
+    background: #fff;
+    border-left: 6px solid var(--vet-vino);
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(30, 20, 80, 0.1);
+}
+
+/* ---------- Búsqueda y listas ---------- */
+.vet-busqueda {
+    margin-bottom: 24px;
+}
+
+.vet-busqueda input {
+    width: 100%;
+    max-width: 480px;
+    padding: 12px 16px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    background: #fff;
+    border: 1px solid var(--vet-borde);
+    border-radius: 999px;
+}
+
+.vet-busqueda input:focus {
+    outline: 2px solid var(--vet-morado-claro);
+    border-color: transparent;
+}
+
+.vet-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.vet-fila {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    width: 100%;
+    padding: 16px 20px;
+    font-family: inherit;
+    text-align: left;
+    color: inherit;
+    background: #fff;
+    border: 0;
+    border-left: 12px solid var(--vet-morado);
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(30, 20, 80, 0.12);
+    cursor: pointer;
+    transition: transform 0.12s;
+}
+
+.vet-fila:hover {
+    transform: translateX(3px);
+}
+
+.vet-fila h3 {
+    margin: 0 0 4px;
+    font-size: 1.05rem;
+    font-weight: 600;
+}
+
+.vet-fila p {
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--vet-texto-suave);
+}
+
+.vet-fila .flecha {
+    font-size: 1.6rem;
+    color: var(--vet-morado);
+}
+
+/* ---------- Detalle de consulta ---------- */
+.vet-detalle {
+    padding: 24px;
+    background: #fff;
+    border-left: 12px solid var(--vet-vino);
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(30, 20, 80, 0.12);
+}
+
+.vet-detalle h2 {
+    margin: 0 0 4px;
+    font-size: 1.4rem;
+}
+
+.vet-detalle .fecha {
+    margin: 0 0 20px;
+    color: var(--vet-texto-suave);
+    font-size: 0.9rem;
+}
+
+.vet-datos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 14px;
+    margin-bottom: 24px;
+}
+
+.vet-dato {
+    padding: 12px 14px;
+    background: var(--vet-fondo);
+    border-radius: 8px;
+}
+
+.vet-dato span {
+    display: block;
+    font-size: 0.78rem;
+    color: var(--vet-texto-suave);
+}
+
+.vet-dato strong {
+    font-size: 1.05rem;
+}
+
+.vet-bloque {
+    padding: 14px 0;
+    border-top: 1px solid var(--vet-borde);
+}
+
+.vet-bloque h4 {
+    margin: 0 0 6px;
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.vet-bloque p {
+    margin: 0;
+    font-size: 0.92rem;
+    line-height: 1.5;
+    white-space: pre-wrap;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 760px) {
+    .vet-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+
+    .vet-tarjeta-cuerpo {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .vet-header {
+        padding: 20px 16px 0;
+    }
+
+    .vet-calendario-texto {
+        padding-left: 16px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .vet-fila,
+    .vet-boton {
+        transition: none;
+    }
+
+    .vet-fila:hover {
+        transform: none;
+    }
+}

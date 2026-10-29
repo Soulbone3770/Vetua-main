@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="d48c1c90-7168-4959-a7a3-ab7b3f0d8d92" name="Changes" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DatabaseLocalColorSettings">
+    <colors>
+      <entry key="48fa59a1-3b8f-4fc1-b882-2195522c9b12" value="" />
+      <entry key="c01dcd4e-ebf4-4bf5-a34c-d9d1afa5612f" value="" />
+    </colors>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Dockerfile" />
+        <option value="Docker Compose" />
+        <option value="TypeScript JSX File" />
+        <option value="TypeScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Soulbone3770&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Soulbone3770/Vetua.git&quot;,
+    &quot;accountId&quot;: &quot;dd7f7d37-cfff-48fa-9525-04dfb1b50eee&quot;
+  }
+}</component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
+  <component name="NextEditCompletionFeaturesState">
+    <decayedCancelled>
+      <entry key="MS100" value="1.3295886647599452E-42" />
+      <entry key="MS500" value="4.289144450520229E-9" />
+      <entry key="S2" value="0.012198064418421398" />
+      <entry key="S5" value="0.39416963958628426" />
+      <entry key="S10" value="1.6129993714390103" />
+      <entry key="S30" value="6.965172454232728" />
+      <entry key="S60" value="14.323481220391635" />
+      <entry key="M2" value="25.953877129653446" />
+      <entry key="M5" value="43.662228530564335" />
+      <entry key="M10" value="54.54748536427492" />
+      <entry key="M15" value="59.2407860617339" />
+      <entry key="M30" value="64.66868935583854" />
+      <entry key="H1" value="68.39233233877226" />
+      <entry key="H2" value="82.93554817489996" />
+      <entry key="H4" value="131.21465783853472" />
+      <entry key="D1" value="284.79157816159477" />
+      <entry key="W1" value="336.28777611649474" />
+    </decayedCancelled>
+    <decayedSelected>
+      <entry key="MS100" value="1.0" />
+      <entry key="MS500" value="1.0000009235644904" />
+      <entry key="S2" value="1.0453375012699893" />
+      <entry key="S5" value="1.432999336969823" />
+      <entry key="S10" value="1.929371901192018" />
+      <entry key="S30" value="2.668345755806918" />
+      <entry key="S60" value="3.2026757222887854" />
+      <entry key="M2" value="3.814870729816578" />
+      <entry key="M5" value="4.853327156729598" />
+      <entry key="M10" value="5.842455009599484" />
+      <entry key="M15" value="6.376477495946068" />
+      <entry key="M30" value="7.076174398307929" />
+      <entry key="H1" value="7.62547013503346" />
+      <entry key="H2" value="10.129779364760932" />
+      <entry key="H4" value="18.55326243693496" />
+      <entry key="D1" value="45.335931648505515" />
+      <entry key="W1" value="54.30820218007311" />
+    </decayedSelected>
+    <decayedShown>
+      <entry key="MS100" value="0.008789519411631318" />
+      <entry key="MS500" value="0.38796557254698444" />
+      <entry key="S2" value="0.8275487460923201" />
+      <entry key="S5" value="1.6339642573405666" />
+      <entry key="S10" value="3.357082822254074" />
+      <entry key="S30" value="9.492048932798703" />
+      <entry key="S60" value="17.414429448503725" />
+      <entry key="M2" value="29.685640896875757" />
+      <entry key="M5" value="48.4661725008365" />
+      <entry key="M10" value="60.35979805444204" />
+      <entry key="M15" value="65.59549309975571" />
+      <entry key="M30" value="71.73296733284242" />
+      <entry key="H1" value="76.01145354007225" />
+      <entry key="H2" value="93.0610685069463" />
+      <entry key="H4" value="149.76393900835308" />
+      <entry key="D1" value="330.1258647756437" />
+      <entry key="W1" value="390.59569633532266" />
+    </decayedShown>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1,
+  &quot;fromUser&quot;: false
+}</component>
+  <component name="ProjectId" id="3IDLznTMstXRNQMFpMXQqKidd46" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "git-widget-placeholder": "main",
+    "javascript.preferred.runtime.type.id": "node",
+    "junie.onboarding.icon.badge.shown": "true",
+    "last_opened_file_path": "/Users/soulbone/Documents/Universidad/Semestre 6/Proyecto Integrador II/Vetua-main",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.jshint": "true",
+    "node.js.detected.package.standard": "true",
+    "node.js.detected.package.stylelint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.jshint": "",
+    "node.js.selected.package.standard": "",
+    "node.js.selected.package.stylelint": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "Errors",
+    "to.speed.mode.migration.done": "true",
+    "ts.external.directory.path": "/Users/soulbone/Library/Caches/JetBrains/WebStorm2026.2/ts-go-native-preview/v7.0.0-dev.jetbrains.20260702.4/node_modules/@typescript/native-preview-darwin-arm64/lib"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
+    ]
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/frontend/project" />
+      <recent name="$PROJECT_DIR$/backend/src" />
+      <recent name="$PROJECT_DIR$/frontend/project/src/hooks" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-4abd2a77f808-JavaScript-WS-262.9437.145" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d48c1c90-7168-4959-a7a3-ab7b3f0d8d92" name="Changes" comment="" />
+      <created>1787294457393</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1787294457393</updated>
+      <workItem from="1787294458397" duration="2714000" />
+      <workItem from="1787356005064" duration="17000" />
+      <workItem from="1787356026477" duration="1135000" />
+      <workItem from="1787358153500" duration="1678000" />
+      <workItem from="1787359846468" duration="238000" />
+      <workItem from="1787360092156" duration="24000" />
+      <workItem from="1787360139514" duration="1453000" />
+      <workItem from="1787389926227" duration="96000" />
+      <workItem from="1787390035668" duration="246000" />
+      <workItem from="1787390286875" duration="73000" />
+      <workItem from="1787390362724" duration="49000" />
+      <workItem from="1787390426865" duration="6803000" />
+      <workItem from="1787433695010" duration="9517000" />
+      <workItem from="1787601059359" duration="252000" />
+      <workItem from="1787601318034" duration="31000" />
+      <workItem from="1787601351926" duration="8000" />
+      <workItem from="1787601378370" duration="6299000" />
+      <workItem from="1787722675273" duration="2283000" />
+      <workItem from="1787724968482" duration="31674000" />
+      <workItem from="1788206350941" duration="1220000" />
+      <workItem from="1788207577435" duration="6093000" />
+      <workItem from="1788220431831" duration="1190000" />
+      <workItem from="1788239626953" duration="12459000" />
+      <workItem from="1788315335875" duration="7000" />
+      <workItem from="1788315368936" duration="11000" />
+      <workItem from="1788327407009" duration="2481000" />
+      <workItem from="1788414133970" duration="1402000" />
+      <workItem from="1788415939800" duration="597000" />
+      <workItem from="1788416542192" duration="11118000" />
+      <workItem from="1788555887338" duration="2678000" />
+      <workItem from="1788646653937" duration="15241000" />
+      <workItem from="1788755165800" duration="517000" />
+      <workItem from="1788755687808" duration="43000" />
+      <workItem from="1788755733003" duration="85000" />
+      <workItem from="1788755875615" duration="6272000" />
+      <workItem from="1788921457924" duration="1152000" />
+      <workItem from="1788990963619" duration="10381000" />
+      <workItem from="1789016039143" duration="734000" />
+      <workItem from="1789071370887" duration="1730000" />
+      <workItem from="1791018371683" duration="1315000" />
+      <workItem from="1791268398684" duration="7506000" />
+      <workItem from="1791532270659" duration="621000" />
+      <workItem from="1791532895997" duration="3617000" />
+      <workItem from="1792478635366" duration="1832000" />
+      <workItem from="1792482499404" duration="31329000" />
+      <workItem from="1793063452881" duration="44950000" />
+      <workItem from="1793292539772" duration="2870000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
