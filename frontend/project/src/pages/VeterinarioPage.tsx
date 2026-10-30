@@ -1,121 +1,44 @@
-import Logout from '../hooks/Logout';
-import { useNavigate } from 'react-router-dom';
-import PanelLayout from '../components/PanelLayout';
-
-const MESES = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio",
-    "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+import Logout from "../hooks/Logout.ts";
+import useAuth from "../hooks/useAuth.ts";
+import { Panel, TarjetaAccion } from "../components/FormUI.tsx";
 
 const VeterinarioPage = () => {
-
     const { logoutProcess } = Logout();
-    const navigate = useNavigate();
-
-    const hoy = new Date();
+    const { usuario } = useAuth();
 
     return (
-        <PanelLayout titulo="BIENVENIDO/A" rol="Veterinario" iconoBack="salir" onBack={() => logoutProcess()}>
-
-            <section className="vet-calendario">
-                <button
-                    type="button"
-                    className="vet-calendario-icono"
-                    onClick={() => navigate("/calendarioPage")}
-                    aria-label="Abrir calendario de citas"
-                >
-                    <span className="mes">{MESES[hoy.getMonth()]}</span>
-                    <span className="dia">{hoy.getDate()}</span>
-                </button>
-                <div className="vet-calendario-texto">
-                    <h2>Calendario</h2>
-                    <h3>Accede al calendario para ver las próximas citas</h3>
-                    <p>
-                        Haz click en el ícono para acceder al calendario, donde podrás ver las próximas citas
-                        programadas, así como acceder a su menú, donde podrás editarlas o cancelarlas.
-                    </p>
-                </div>
-            </section>
-
-            <main className="vet-contenido">
-                <div className="vet-grid">
-
-                    <article className="vet-tarjeta registrar">
-                        <h2>Registrar consultas médicas</h2>
-                        <div className="vet-tarjeta-cuerpo">
-                            <p>
-                                Haz click en el botón para ingresar al menú de registro de una consulta médica.
-                                En el que podrás ingresar la información pertinente sobre esta. Una vez ingresada,
-                                la podrás ver en el apartado de consultar tus registros de consultas médicas.
-                            </p>
-                            <button type="button" className="vet-boton"
-                                    onClick={() => navigate("/veterinarioPage/veterinarioRegistrarConsulta")}>
-                                Registrar consulta
-                            </button>
-                        </div>
-                    </article>
-
-                    <article className="vet-tarjeta consultar">
-                        <h2>Consultar registros médicos</h2>
-                        <div className="vet-tarjeta-cuerpo">
-                            <p>
-                                Haz click en el botón para consultar los registros médicos realizados anteriormente.
-                                En este apartado podrás buscar los registros médicos realizados por medio del motivo
-                                de la consulta.
-                            </p>
-                            <button type="button" className="vet-boton"
-                                    onClick={() => navigate("/veterinarioPage/veterinarioBuscarConsulta")}>
-                                Consultar registros
-                            </button>
-                        </div>
-                    </article>
-
-                    <article className="vet-tarjeta cliente">
-                        <h2>Buscar cliente</h2>
-                        <div className="vet-tarjeta-cuerpo">
-                            <p>
-                                Haz click en el botón para buscar a un cliente por su nombre o número de
-                                identificación, además podrás realizar cambios en la información del cliente
-                                a petición de este.
-                            </p>
-                            <button type="button" className="vet-boton"
-                                    onClick={() => navigate("/veterinarioPage/veterinarioBuscarCliente")}>
-                                Buscar cliente
-                            </button>
-                        </div>
-                    </article>
-
-                    <article className="vet-tarjeta receta">
-                        <h2>Registrar vacuna a una mascota</h2>
-                        <div className="vet-tarjeta-cuerpo">
-                            <p>
-                                Haz click en el botón para consultar los registros médicos realizados anteriormente.
-                                En este apartado podrás buscar los registros médicos realizados por medio del motivo
-                                de la consulta.
-                            </p>
-                            <button type="button" className="vet-boton"
-                                    onClick={() => navigate("/veterinaroVacunacionesPage")}>
-                                Registrar vacuna
-                            </button>
-                        </div>
-                    </article>
-
-                    <article className="vet-tarjeta receta">
-                        <h2>Buscar mascota</h2>
-                        <div className="vet-tarjeta-cuerpo">
-                            <p>
-                                Haz click en el botón para consultar los registros médicos realizados anteriormente.
-                                En este apartado podrás buscar los registros médicos realizados por medio del motivo
-                                de la consulta.
-                            </p>
-                            <button type="button" className="vet-boton"
-                                    onClick={() => navigate("/buscarMascota")}>
-                                Buscar mascotas
-                            </button>
-                        </div>
-                    </article>
-
-                </div>
-            </main>
-        </PanelLayout>
+        <Panel rolLabel="Veterinario" subtitulo={usuario?.username} onExit={() => logoutProcess()}>
+            <TarjetaAccion
+                titulo="Registrar consultas médicas"
+                texto="Haz click en el botón para ingresar al menú de registro de una consulta médica. En el que podrás ingresar la información pertinente sobre esta. Una vez ingresada, la podrás ver en el apartado de consultar tus registros de consultas médicas."
+                boton="Registrar consulta" ruta="/veterinarioPage/veterinarioRegistrarConsulta" color="#4C00C8"
+            />
+            <TarjetaAccion
+                titulo="Consultar registros médicos"
+                texto="Haz click en el botón para consultar los registros médicos realizados anteriormente, en este apartado podrás buscar los registros médicos que has realizado y ver el detalle de cada uno."
+                boton="Consultar registros" ruta="/veterinarioPage/veterinarioBuscarConsulta" color="#8B3A3A"
+            />
+            <TarjetaAccion
+                titulo="Buscar cliente"
+                texto="Haz click en el botón para buscar a un cliente por su nombre o número de identificación, además podrás realizar cambios en la información del cliente a petición de este."
+                boton="Buscar cliente" ruta="/veterinarioPage/veterinarioBuscarCliente" color="#3B5BB5"
+            />
+            <TarjetaAccion
+                titulo="Crear receta"
+                texto="Haz click en el botón para crear una nueva receta médica, esta se la podrás asignar a la mascota de un cliente. Las recetas las podrás visualizar en el apartado de consultar registros médicos."
+                boton="Crear receta" ruta="/veterinarioPage/veterinarioCrearReceta" color="#7B4FC9"
+            />
+            <TarjetaAccion
+                titulo="Registrar vacuna"
+                texto="Haz click en el botón para registrar la aplicación de una vacuna a la mascota de un cliente, con la fecha de aplicación y la fecha de la próxima dosis."
+                boton="Registrar vacuna" ruta="/veterinarioPage/veterinarioVacunaciones" color="#2F7D6B"
+            />
+            <TarjetaAccion
+                titulo="Buscar mascota"
+                texto="Haz click en el botón para buscar las mascotas de un cliente mediante su número de documento. Podrás entrar a la página de la mascota para ver y editar su información."
+                boton="Buscar mascota" ruta="/buscarMascota" color="#B8742A"
+            />
+        </Panel>
     );
 };
 

@@ -1,186 +1,92 @@
 import './App.css';
+import type { ComponentProps, ReactNode } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import AuthProvider from "./components/AuthProvider.tsx";
 import ProtectedRoute from './components/ProtectedRoute.tsx';
 
+import Index from './pages/Index.tsx';
 import Login from './pages/Login.tsx';
-import AdminPage from "./pages/AdminPage.tsx";
 import NoAutorizado from "./pages/NoAutorizado.tsx";
+import CalendarioPage from "./pages/CalendarioPage.tsx";
+
+import AdminPage from "./pages/AdminPage.tsx";
+import AdminClinicaPage from "./pages/AdminClinicaPage.tsx";
+import AdminClinicaEstadisticasPage from "./pages/AdminClinicaEstadisticasPage.tsx";
+import AdminClinicaUsuariosPage from "./pages/AdminClinicaUsuariosPage.tsx";
+
 import RecepcionistaPage from "./pages/RecepcionistaPage.tsx";
 import RecRegistrarCliente from "./pages/RecRegistrarCliente.tsx";
 import RecRegistrarMascota from "./pages/RecRegistrarMascota.tsx";
 import RecBuscarCliente from "./pages/RecBuscarCliente.tsx";
 import RecPaginaCliente from "./pages/RecPaginaCliente.tsx";
 import RecAgendarCita from "./pages/RecAgendarCita.tsx";
-import AdminClinicaPage from "./pages/AdminClinicaPage.tsx";
+import RecBuscarCitas from "./pages/RecBuscarCitas.tsx";
+import RecCitaPage from "./pages/RecCitaPage.tsx";
+import BuscarMascota from "./pages/BuscarMascota.tsx";
+import MascotaPage from "./pages/MascotaPage.tsx";
+
 import VeterinarioPage from './pages/VeterinarioPage.tsx';
 import VeterinarioRegistrarConsulta from './pages/VeterinarioRegistrarConsulta.tsx';
 import VeterinarioBuscarConsultas from "./pages/VeterinarioBuscarConsultas.tsx";
 import VeterinarioConsultaPage from "./pages/VeterinarioConsultaPage.tsx";
-import VeterinarioCrearReceta from "./pages/VeterinarioCrearReceta.tsx";
-import CalendarioPage from "./pages/CalendarioPage.tsx";
-import RecBuscarCitas from "./pages/RecBuscarCitas.tsx";
-import RecCitaPage from "./pages/RecCitaPage.tsx";
 import VeterinarioVacunacionesPage from "./pages/VeterinarioVacunacionesPage.tsx";
-import BuscarMascota from "./pages/BuscarMascota.tsx";
-import MascotaPage from "./pages/MascotaPage.tsx";
-import AdminClinicaEstadisticasPage from "./pages/AdminClinicaEstadisticasPage.tsx";
+import VeterinarioCrearReceta from "./pages/VeterinarioCrearReceta.tsx";
+
+type Roles = ComponentProps<typeof ProtectedRoute>["rolesPermitidos"];
+
+const REC: Roles = ["recepcionista", "adminClinica"];
+const VET: Roles = ["veterinario"];
+const TODOS: Roles = ["recepcionista", "adminClinica", "veterinario"];
+
+// Atajo: ruta protegida por rol
+const P = ({ roles, children }: { roles?: Roles; children: ReactNode }) => (
+    <ProtectedRoute rolesPermitidos={roles}>{children}</ProtectedRoute>
+);
 
 function App() {
-
     return (
         <AuthProvider>
             <BrowserRouter>
                 <Routes>
-                    <Route path="/" element={<Login />} />
+                    <Route path="/" element={<Index />} />
+                    <Route path="/login" element={<Login />} />
                     <Route path="/noAutorizado" element={<NoAutorizado />} />
-                    
-                    {/* Admin Sistema */}
-                    <Route path='/adminPage' element={
-                        <ProtectedRoute rolesPermitidos={["adminSistema"]}>
-                            <AdminPage />
-                        </ProtectedRoute>
-                    } />
 
-                    {/* Admin Clínica */}
-                    <Route path="/adminClinicaPage" element={
-                        <ProtectedRoute rolesPermitidos={["adminClinica"]}>
-                            <AdminClinicaPage />
-                        </ProtectedRoute>
-                    } />
+                    {/* Admin del sistema */}
+                    <Route path="/adminPage" element={<P roles={["adminSistema"]}><AdminPage /></P>} />
 
-                    {/* Recepcionista & Admin Clínica */}
-                    <Route path="/recepcionistaPage" element={
-                        <ProtectedRoute rolesPermitidos={["recepcionista", "adminClinica"]}>
-                            <RecepcionistaPage />
-                        </ProtectedRoute>
-                    } />
-                    
-                    {/* Rutas de Recepción (Soportan formato corto y anidado) */}
-                    <Route path="/recRegistrarCliente" element={
-                        <ProtectedRoute rolesPermitidos={["recepcionista", "adminClinica"]}>
-                            <RecRegistrarCliente />
-                        </ProtectedRoute>
-                    } />
-                    <Route path="/recepcionistaPage/recRegistrarCliente" element={
-                        <ProtectedRoute rolesPermitidos={["recepcionista", "adminClinica"]}>
-                            <RecRegistrarCliente />
-                        </ProtectedRoute>
-                    } />
+                    {/* Admin de la clínica */}
+                    <Route path="/adminClinicaPage" element={<P roles={["adminClinica"]}><AdminClinicaPage /></P>} />
+                    <Route path="/adminClinicaPage/estadisticas" element={<P roles={["adminClinica"]}><AdminClinicaEstadisticasPage /></P>} />
+                    <Route path="/adminClinicaPage/usuarios" element={<P roles={["adminClinica"]}><AdminClinicaUsuariosPage /></P>} />
 
-                    <Route path="/recRegistrarMascota" element={
-                        <ProtectedRoute rolesPermitidos={["recepcionista", "adminClinica"]}>
-                            <RecRegistrarMascota />
-                        </ProtectedRoute>
-                    } />
-                    <Route path="/recepcionistaPage/recRegistrarMascota" element={
-                        <ProtectedRoute rolesPermitidos={["recepcionista", "adminClinica"]}>
-                            <RecRegistrarMascota />
-                        </ProtectedRoute>
-                    } />
+                    {/* Recepcionista y admin de la clínica */}
+                    <Route path="/recepcionistaPage" element={<P roles={REC}><RecepcionistaPage /></P>} />
+                    <Route path="/recRegistrarCliente" element={<P roles={REC}><RecRegistrarCliente /></P>} />
+                    <Route path="/recepcionistaPage/recRegistrarCliente" element={<P roles={REC}><RecRegistrarCliente /></P>} />
+                    <Route path="/recRegistrarMascota" element={<P roles={REC}><RecRegistrarMascota /></P>} />
+                    <Route path="/recepcionistaPage/recRegistrarMascota" element={<P roles={REC}><RecRegistrarMascota /></P>} />
+                    <Route path="/recBuscarCliente" element={<P roles={REC}><RecBuscarCliente /></P>} />
+                    <Route path="/recepcionistaPage/recBuscarCliente" element={<P roles={REC}><RecBuscarCliente /></P>} />
+                    <Route path="/recAgendarCita" element={<P roles={REC}><RecAgendarCita /></P>} />
+                    <Route path="/recepcionistaPage/recAgendarCita" element={<P roles={REC}><RecAgendarCita /></P>} />
+                    <Route path="/recBuscarCitas" element={<P roles={REC}><RecBuscarCitas /></P>} />
+                    <Route path="/recCitaPage/:id" element={<P roles={REC}><RecCitaPage /></P>} />
 
-                    <Route path="/recBuscarCliente" element={
-                        <ProtectedRoute rolesPermitidos={["recepcionista", "adminClinica"]}>
-                            <RecBuscarCliente />
-                        </ProtectedRoute>
-                    } />
-                    <Route path="/recepcionistaPage/recBuscarCliente" element={
-                        <ProtectedRoute rolesPermitidos={["recepcionista", "adminClinica"]}>
-                            <RecBuscarCliente />
-                        </ProtectedRoute>
-                    } />
+                    {/* Compartidas entre recepción y veterinario */}
+                    <Route path="/recPaginaCliente/:clienteId" element={<P roles={TODOS}><RecPaginaCliente /></P>} />
+                    <Route path="/buscarMascota" element={<P roles={TODOS}><BuscarMascota /></P>} />
+                    <Route path="/mascotaPage/:id" element={<P roles={TODOS}><MascotaPage /></P>} />
+                    <Route path="/calendarioPage" element={<P roles={TODOS}><CalendarioPage /></P>} />
 
-                    <Route path="/recAgendarCita" element={
-                        <ProtectedRoute rolesPermitidos={["recepcionista", "adminClinica"]}>
-                            <RecAgendarCita />
-                        </ProtectedRoute>
-                    } />
-                    <Route path="/recepcionistaPage/recAgendarCita" element={
-                        <ProtectedRoute rolesPermitidos={["recepcionista", "adminClinica"]}>
-                            <RecAgendarCita />
-                        </ProtectedRoute>
-                    } />
-
-                    <Route path="/recPaginaCliente/:clienteId" element={
-                        <ProtectedRoute rolesPermitidos={["recepcionista", "adminClinica", "veterinario"]}>
-                            <RecPaginaCliente />
-                        </ProtectedRoute>
-                    } />
-                    <Route path={"/recBuscarCitas"} element={
-                        <ProtectedRoute rolesPermitidos={["recepcionista", "adminClinica", "veterinario"]}>
-                            <RecBuscarCitas />
-                        </ProtectedRoute>
-                    }/>
-                    <Route path={"/recCitaPage/:id"} element={
-                        <ProtectedRoute rolesPermitidos={["recepcionista", "adminClinica", "veterinario"]}>
-                            <RecCitaPage />
-                        </ProtectedRoute>
-                    } />
                     {/* Veterinario */}
-                    <Route path="/veterinarioPage" element={
-                        <ProtectedRoute rolesPermitidos={["veterinario", "adminClinica"]}>
-                            <VeterinarioPage />
-                        </ProtectedRoute>
-                    } />
-                    <Route path="/veterinarioPage/veterinarioRegistrarConsulta" element={
-                        <ProtectedRoute rolesPermitidos={["veterinario", "adminClinica"]}>
-                            <VeterinarioRegistrarConsulta />
-                        </ProtectedRoute>
-                    } />
-                    <Route path="/veterinarioPage/veterinarioBuscarCliente" element={
-                        <ProtectedRoute rolesPermitidos={["veterinario", "adminClinica"]}>
-                            <RecBuscarCliente />
-                        </ProtectedRoute>
-                    } />
-                    <Route path="/veterinarioPage/veterinarioBuscarConsulta" element={
-                        <ProtectedRoute rolesPermitidos={["veterinario", "adminClinica"]}>
-                            <VeterinarioBuscarConsultas />
-                        </ProtectedRoute>
-                    } />
-                    <Route path="/veterinarioPage/veterinarioConsultaPage/:consultaId/:veterinarioId" element={
-                        <ProtectedRoute>
-                            <VeterinarioConsultaPage />
-                        </ProtectedRoute>
-                    } />
-
-                    {/* Crear Receta (Formato corto y anidado) */}
-                    <Route path="/veterinarioCrearReceta" element={
-                        <ProtectedRoute rolesPermitidos={["veterinario", "adminClinica"]}>
-                            <VeterinarioCrearReceta />
-                        </ProtectedRoute>
-                    } />
-                    <Route path="/veterinarioPage/veterinarioCrearReceta" element={
-                        <ProtectedRoute rolesPermitidos={["veterinario", "adminClinica"]}>
-                            <VeterinarioCrearReceta />
-                        </ProtectedRoute>
-                    } />
-
-                    {/* Calendario general */}
-                    <Route path="/calendarioPage" element={
-                        <ProtectedRoute rolesPermitidos={["veterinario", "recepcionista", "adminClinica"]}>
-                            <CalendarioPage />
-                        </ProtectedRoute>
-                    } />
-                    <Route path="/veterinaroVacunacionesPage" element={
-                        <ProtectedRoute rolesPermitidos={["veterinario", "adminClinica"]}>
-                            <VeterinarioVacunacionesPage />
-                        </ProtectedRoute>
-                    } />
-                    <Route path="/buscarMascota" element={
-                        <ProtectedRoute rolesPermitidos={["veterinario", "recepcionista", "adminClinica"]}>
-                            <BuscarMascota />
-                        </ProtectedRoute>
-                     } />
-                    <Route path="/mascotaPage/:id" element={
-                        <ProtectedRoute rolesPermitidos={["veterinario", "recepcionista", "adminClinica"]} >
-                            <MascotaPage />
-                        </ProtectedRoute>
-                    } />
-                    <Route path="/adminClinicaEstadisticasPage" element={
-                        <ProtectedRoute rolesPermitidos={["adminClinica"]}>
-                            <AdminClinicaEstadisticasPage />
-                        </ProtectedRoute>
-                    } />
+                    <Route path="/veterinarioPage" element={<P roles={VET}><VeterinarioPage /></P>} />
+                    <Route path="/veterinarioPage/veterinarioRegistrarConsulta" element={<P roles={VET}><VeterinarioRegistrarConsulta /></P>} />
+                    <Route path="/veterinarioPage/veterinarioBuscarCliente" element={<P roles={VET}><RecBuscarCliente /></P>} />
+                    <Route path="/veterinarioPage/veterinarioBuscarConsulta" element={<P roles={VET}><VeterinarioBuscarConsultas /></P>} />
+                    <Route path="/veterinarioPage/veterinarioConsultaPage/:consultaId/:veterinarioId" element={<P roles={VET}><VeterinarioConsultaPage /></P>} />
+                    <Route path="/veterinarioPage/veterinarioVacunaciones" element={<P roles={VET}><VeterinarioVacunacionesPage /></P>} />
+                    <Route path="/veterinarioPage/veterinarioCrearReceta" element={<P roles={VET}><VeterinarioCrearReceta /></P>} />
                 </Routes>
             </BrowserRouter>
         </AuthProvider>

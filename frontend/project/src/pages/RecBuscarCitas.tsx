@@ -1,95 +1,69 @@
 import useGetCitas from "../hooks/useGetCitas.ts";
 import {useNavigate} from "react-router-dom";
-import {ESTADOS, EstadosCita, type EstadosCitaType} from "../types/CitasType.ts";
+import {ESTADOS, EstadosCita} from "../types/CitasType.ts";
 import useForm from "../hooks/useForm.ts";
-import {useEffect, useState} from "react";
+import {useMemo, useState} from "react";
+import useAuth from "../hooks/useAuth.ts";
+import Input from "../components/Input.tsx";
+import { Pagina, FormCard, SelectField, FilaLista, MensajeError, BOTON_PRINCIPAL, BOTON_SECUNDARIO } from "../components/FormUI.tsx";
+import { etiquetaRol, rutaInicio } from "../utils/rolInfo.ts";
+import { formatFecha } from "../utils/formatFecha.ts";
 
 const RecBuscarCitas = () => {
 
     const navigate = useNavigate();
+    const { rol } = useAuth();
     const { citas, mensaje } = useGetCitas();
-    const { valores, handleOnChange, resetForm } = useForm({estadoFiltro: "" as EstadosCitaType | string, fechaFiltro: ""});
-    const[citasFiltradas, setCitasFiltradas] = useState(citas);
-    const[filtrando, setFiltrando] = useState(false);
+    const { valores, handleOnChange, resetForm } = useForm({estadoFiltro: "", fechaFiltro: ""});
 
-    useEffect(() => {
-        setCitasFiltradas(citas);
-    },[citas])
+    // Filtro aplicado (solo cambia al pulsar "Filtrar")
+    const[filtro, setFiltro] = useState({ estado: "", fecha: "" });
 
-    const filtrar = () => {
-        if(valores.estadoFiltro === "" && valores.fechaFiltro === ""){
-            setCitasFiltradas(citas);
-            setFiltrando(false);
-            return
-        }
-
-        if(valores.estadoFiltro === "" && valores.fechaFiltro !== ""){
-            setCitasFiltradas(citas.filter(c => c.fecha_hora.slice(0, 10) === valores.fechaFiltro));
-            setFiltrando(false);
-            return
-        }
-
-        if(valores.estadoFiltro !== "" && valores.fechaFiltro === ""){
-            setCitasFiltradas(citas.filter(c => c.estado === valores.estadoFiltro));
-            setFiltrando(false);
-            return
-        }
-
-        setCitasFiltradas(citas.filter(c => c.estado === valores.estadoFiltro && c.fecha_hora.slice(0, 10) === valores.fechaFiltro));
-        setFiltrando(false);
-    }
-
-    const renderCitas = () => {
-        if(citasFiltradas.length === 0){
-            return <p>No se encontraron citas</p>
-        }
-
-        return citasFiltradas.map(c => {
-            return (
-                <div key={c.id} onClick={() => navigate(`/recCitaPage/${c.id}`)}>
-                    <h2>{c.motivo}</h2>
-                    <p>{c.estado}</p>
-                    <p>{c.fecha_hora.slice(0, 10)}</p>
-                </div>
-            )
-        })
-    };
-
-    const renderFiltro = () => {
-        return (
-            <>
-                <button onClick={() => {resetForm(); setCitasFiltradas(citas)}}>Borrar filtro</button>
-                <button onClick={() => setFiltrando(false)}>Cancelar</button>
-                <div>
-                    <p>Filtrar por estado</p>
-                    <select value={valores.estadoFiltro} name="estadoFiltro" onChange={handleOnChange}>
-                        <option value="">Todos los estados</option>
-                        {ESTADOS.map(e => {
-                            return (
-                                <option key={e} value={EstadosCita[e]} >{e}</option>
-                            )
-                        })}
-                    </select>
-                </div>
-                <div>
-                    <p>Filtrar por fecha</p>
-                    <input type="date" name="fechaFiltro" value={valores.fechaFiltro} onChange={handleOnChange} />
-                </div>
-                <button onClick={() => filtrar()}>Filtrar</button>
-            </>
-        )
-    }
-
-    if(mensaje) return <h1>{mensaje}</h1>
+    const citasFiltradas = useMemo(() => citas.filter(c =>
+        (filtro.estado === "" || c.estado === filtro.estado) &&
+        (filtro.fecha === "" || c.fecha_hora.slice(0, 10) === filtro.fecha)
+    ), [citas, filtro]);
 
     return (
-        <div>
-            {filtrando
-                ? renderFiltro()
-                : <button onClick={() => setFiltrando(true)}>Filtrar</button>
-            }
-            {renderCitas()}
-        </div>
+        <Pagina titulo="Consultar citas" ancho="max-w-3xl" rolLabel={etiquetaRol(rol)} volverA={rutaInicio(rol)}>
+            <FormCard titulo="Filtrar citas">
+                <div className="grid grid-cols-1 gap-x-8 md:grid-cols-2">
+                    <SelectField name="estadoFiltro" label="Filtrar por estado" value={valores.estadoFiltro} onChange={handleOnChange}>
+                        <option value="">Todos los estados</option>
+                        {ESTADOS.map(e => (
+                            <option key={e} value={EstadosCita[e]}>{e}</option>
+                        ))}
+                    </SelectField>
+                    <Input label="Filtrar por fecha" type="date" name="fechaFiltro" value={valores.fechaFiltro} onChange={handleOnChange} />
+                </div>
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                    <button type="button" className={BOTON_SECUNDARIO} onClick={() => { resetForm(); setFiltro({ estado: "", fecha: "" }); }}>
+                        Borrar filtro
+                    </button>
+                    <button type="button" className={BOTON_PRINCIPAL} onClick={() => setFiltro({ estado: valores.estadoFiltro, fecha: valores.fechaFiltro })}>
+                        Filtrar
+                    </button>
+                </div>
+            </FormCard>
+
+            <FormCard titulo="Citas">
+                <div className="min-h-48">
+                    {mensaje
+                        ? <MensajeError texto={mensaje} />
+                        : citasFiltradas.length === 0
+                            ? <p className="py-4 text-sm text-gray-500">No se encontraron citas</p>
+                            : citasFiltradas.map(c => (
+                                <FilaLista
+                                    key={c.id}
+                                    titulo={c.motivo}
+                                    lineas={[["Estado", c.estado], ["Fecha", formatFecha(c.fecha_hora)]]}
+                                    onClick={() => navigate(`/recCitaPage/${c.id}`)}
+                                />
+                            ))
+                    }
+                </div>
+            </FormCard>
+        </Pagina>
     );
 };
 

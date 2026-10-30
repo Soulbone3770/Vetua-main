@@ -4,6 +4,7 @@ import {useNavigate} from "react-router-dom";
 import type {ClienteType} from "../types/ClienteType.ts";
 import { Pagina, FormCard } from "../components/FormUI.tsx";
 import useAuth from "../hooks/useAuth.ts";
+import { etiquetaRol } from "../utils/rolInfo.ts";
 
 export const RecBuscarCliente = () => {
 
@@ -49,7 +50,7 @@ export const RecBuscarCliente = () => {
     );
 
     return (
-        <Pagina titulo="Buscar cliente" ancho="max-w-3xl" volverA={-1} rolLabel={rol}>
+        <Pagina titulo="Buscar cliente" ancho="max-w-3xl" rolLabel={etiquetaRol(rol)} volverA={-1}>
             <div className="text-left text-sm font-bold text-black">
                 {renderBarra()}
             </div>

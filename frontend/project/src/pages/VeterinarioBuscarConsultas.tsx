@@ -3,7 +3,8 @@ import useBarraBusqueda from "../hooks/useBarraBusqueda.tsx";
 import type {ConsultasType} from "../types/ConsultasType.ts";
 import {useNavigate} from "react-router-dom";
 import useAuth from "../hooks/useAuth.ts";
-import PanelLayout from "../components/PanelLayout.tsx";
+import { Pagina, FormCard, FilaLista, MensajeError } from "../components/FormUI.tsx";
+import { formatFecha } from "../utils/formatFecha.ts";
 
 const VeterinarioBuscarConsultas = () => {
 
@@ -16,38 +17,34 @@ const VeterinarioBuscarConsultas = () => {
     const {array: consultasArray, renderBarra} = useBarraBusqueda<ConsultasType>({criterioBusqueda: "motivo_consulta", arrayBusqueda: consultas});
 
     const renderConsultas = () => {
-        return (
-            <div className="vet-lista">
-                {consultasArray.map(consulta => (
-                    <button
-                        type="button"
-                        key={consulta.id}
-                        className="vet-fila"
-                        onClick={() => navigate(`/veterinarioPage/veterinarioConsultaPage/${consulta.id}/${consulta.id_veterinario}`)}
-                    >
-                        <div>
-                            <h3>{consulta.motivo_consulta}</h3>
-                            <p>{consulta.fecha_hora}</p>
-                        </div>
-                        <span className="flecha" aria-hidden="true">›</span>
-                    </button>
-                ))}
-            </div>
-        )
+        if(consultasArray.length === 0){
+            return <p className="py-4 text-sm text-gray-500">No hay registros médicos</p>
+        }
+
+        return consultasArray.map(consulta => (
+            <FilaLista
+                key={consulta.id}
+                titulo={consulta.motivo_consulta}
+                lineas={[["Fecha", formatFecha(consulta.fecha_hora)]]}
+                onClick={() => navigate(`/veterinarioPage/veterinarioConsultaPage/${consulta.id}/${consulta.id_veterinario}`)}
+            />
+        ))
     }
 
     return (
-        <PanelLayout titulo="Consultar registros médicos" rol="Veterinario" onBack={() => navigate("/veterinarioPage")}>
-            <main className="vet-contenido">
-                <div className="vet-busqueda">
-                    {renderBarra()}
+        <Pagina titulo="Consultar registros" ancho="max-w-3xl" rolLabel="Veterinario" volverA="/veterinarioPage">
+            <div className="text-left text-sm font-bold text-black">
+                {renderBarra()}
+            </div>
+            <FormCard titulo="Registros médicos">
+                <div className="min-h-64">
+                    {noConsultas
+                        ? <MensajeError texto={noConsultas} />
+                        : renderConsultas()
+                    }
                 </div>
-                {noConsultas
-                    ? <p className="vet-aviso">{noConsultas}</p>
-                    : renderConsultas()
-                }
-            </main>
-        </PanelLayout>
+            </FormCard>
+        </Pagina>
     )
 
 };

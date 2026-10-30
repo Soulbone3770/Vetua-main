@@ -17,9 +17,10 @@ interface TarjetaAdminProps {
     boton: string;
     color: string; // color de la barra superior y del botón
     onClick: () => void;
+    disabled?: boolean;
 }
 
-const TarjetaAdmin = ({ titulo, texto, boton, color, onClick }: TarjetaAdminProps) => (
+const TarjetaAdmin = ({ titulo, texto, boton, color, onClick, disabled = false }: TarjetaAdminProps) => (
     <div className="mx-auto w-full max-w-xl overflow-hidden rounded-xl bg-white shadow-md">
         <div className="h-5" style={{ backgroundColor: color }} />
         <div className="px-6 pb-6 pt-4">
@@ -29,10 +30,12 @@ const TarjetaAdmin = ({ titulo, texto, boton, color, onClick }: TarjetaAdminProp
                 <button
                     type="button"
                     onClick={onClick}
-                    className="shrink-0 rounded-lg border-2 bg-white px-4 py-2 text-sm font-medium transition"
+                    disabled={disabled}
+                    title={disabled ? "Próximamente" : undefined}
+                    className="shrink-0 rounded-lg border-2 bg-white px-4 py-2 text-sm font-medium transition disabled:cursor-not-allowed disabled:opacity-50"
                     style={{ borderColor: color, color }}
-                    onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = color; e.currentTarget.style.color = "white"; }}
-                    onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = "white"; e.currentTarget.style.color = color; }}
+                    onMouseEnter={(e) => { if (disabled) return; e.currentTarget.style.backgroundColor = color; e.currentTarget.style.color = "white"; }}
+                    onMouseLeave={(e) => { if (disabled) return; e.currentTarget.style.backgroundColor = "white"; e.currentTarget.style.color = color; }}
                 >
                     {boton}
                 </button>
@@ -51,9 +54,9 @@ const AdminClinicaPage = () => {
 
     const { logoutProcess } = Logout();
 
-    const clId = usuario?.clinicaId
+    const clId = usuario?.clinicaId;
 
-    const { valores: valoresUsuario, handleOnChange: handleOnChangeUsuario, resetForm: resetFormUsuario } = useForm({"username": "", "password": "", "rol": "" as RolesType, "clinicaId": clId || 0});
+    const { valores: valoresUsuario, handleOnChange: handleOnChangeUsuario, resetForm: resetFormUsuario } = useForm({"username": "", "password": "", "rol": "" as RolesType, "clinicaId": clId ?? 0});
 
     const[mensaje, setMensaje] = useState("");
     const[mostrarRegistro, setMostrarRegistro] = useState(false);
@@ -74,7 +77,7 @@ const AdminClinicaPage = () => {
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(valoresUsuario)
+            body: JSON.stringify({...valoresUsuario, clinicaId: clId})
         });
 
         const data: DataType = await res.json();
@@ -100,12 +103,6 @@ const AdminClinicaPage = () => {
             <h1 className="animate-pulse text-xl font-semibold !text-purple-700">CARGANDO...</h1>
         </div>
     );
-
-    if(valoresUsuario.clinicaId === 0) return (
-        <div className="flex min-h-screen items-center justify-center bg-gray-50">
-            <h1 className="animate-pulse text-xl font-semibold !text-purple-700">No se encontro el id de la clinica</h1>
-        </div>
-    )
 
     if(!user) return (
         <div className="flex min-h-screen items-center justify-center bg-gray-50">
@@ -142,11 +139,18 @@ const AdminClinicaPage = () => {
                     onClick={() => setMostrarRegistro(true)}
                 />
                 <TarjetaAdmin
-                    titulo="Ver estadisticas"
-                    texto="Haz click en el botón para acceder a las estadisticas de la clinica, en esta podrás vizualizas tanto el numero de mascotas, como el numero de citas registradas"
-                    boton="Ver estadisticas"
+                    titulo="Ver lista de usuarios"
+                    texto="Haz click en el botón para acceder a la lista de usuarios, en esta podrás buscar un usuario mediante su nombre de usuario, además, podrás acceder a la página del usuario, esto te permitirá gestionar su información."
+                    boton="Ver lista"
                     color="#8B3A3A"
-                    onClick={() => navigate("/adminClinicaEstadisticasPage")}
+                    onClick={() => navigate("/adminClinicaPage/usuarios")}
+                />
+                <TarjetaAdmin
+                    titulo="Estadísticas de la clínica"
+                    texto="Haz click en el botón para ver las estadísticas de tu clínica, como el total de mascotas registradas y el total de citas."
+                    boton="Ver estadísticas"
+                    color="#3B5BB5"
+                    onClick={() => navigate("/adminClinicaPage/estadisticas")}
                 />
             </main>
 

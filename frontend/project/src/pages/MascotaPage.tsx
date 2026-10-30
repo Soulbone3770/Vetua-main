@@ -1,8 +1,9 @@
 import {useParams} from "react-router-dom";
 import useGetMascotaByParams from "../hooks/useGetMascotaByParams.ts";
 import useUpdateMascotaForm from "../hooks/useUpdateMascotaForm.tsx";
-import {Pagina} from "../components/FormUI.tsx";
+import { Pagina, Cargando, MensajeError } from "../components/FormUI.tsx";
 import useAuth from "../hooks/useAuth.ts";
+import { etiquetaRol } from "../utils/rolInfo.ts";
 
 const MascotaPage = () => {
 
@@ -13,14 +14,12 @@ const MascotaPage = () => {
     const { mascota, mensaje, getMascota } = useGetMascotaByParams(mascotaId);
     const { renderFinal } = useUpdateMascotaForm(mascota, getMascota);
 
-    if(mensaje) return <p>{mensaje}</p>
-
     return (
-        <Pagina titulo="Mascota" rolLabel={rol ?? "Usuario"} volverA={-1}>
-            {mensaje !== ""
-                ? <p className="text-sm font-medium text-red-500">{mensaje}</p>
+        <Pagina titulo="Mascota" rolLabel={etiquetaRol(rol)} volverA={-1}>
+            {mensaje
+                ? <MensajeError texto={mensaje} />
                 : !mascota
-                    ? <h1 className="animate-pulse text-center text-xl font-semibold !text-purple-700">CARGANDO...</h1>
+                    ? <Cargando />
                     : renderFinal()
             }
         </Pagina>

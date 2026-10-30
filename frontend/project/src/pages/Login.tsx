@@ -7,17 +7,18 @@ import {ROLES, rolesObjeto} from "../types/Roles.ts";
 import { RutasSegunRol } from "../types/RutasSegunRol.ts";
 import useAuth from '../hooks/useAuth.ts';
 
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+const ROLES_VALIDOS: string[] = Object.values(rolesObjeto);
+
 const Login = () => {
     const navigate = useNavigate();
     const { authCheck, rol } = useAuth();
 
-    const rolesValidos = Object.values(rolesObjeto);
-
     useEffect(() => {
-        if(rolesValidos.includes(rol)){
+        if(ROLES_VALIDOS.includes(rol)){
             navigate(`${RutasSegunRol[rol]}`)
         }
-    }, [navigate, rol, rolesValidos]);
+    }, [navigate, rol]);
 
     const { valores, handleOnChange, resetForm } = useForm({
         "username": "",
@@ -32,8 +33,7 @@ const Login = () => {
         e.preventDefault();
         setMensaje("");
 
-        // Ruta enviada a través del proxy configurado en Vite
-        const url = "http://localhost:3000/users/api/login";
+        const url = `${API_URL}/users/api/login`;
 
         try {
             const res = await fetch(url, {
