@@ -4,7 +4,7 @@ const checkFields = (fields: Array<string>) => {
     return (req: Request, res: Response, next: NextFunction) => {
         for(const field of fields){
             if(!req.body[field]){
-                return res.json({
+                return res.status(400).json({
                     mensaje: "Todos los campos son necesarioss"
                 });
             }

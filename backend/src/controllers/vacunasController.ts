@@ -6,18 +6,18 @@ import type {VacunacionesType} from "../types/VacunacionesType.js";
 export const createVacunacion = async(req: Request, res: Response) => {
 
     const { fecha_aplicacion, proxima_dosis, mascota_id, vacuna_id } = req.body;
-    const today = new Date().toLocaleTimeString("es-CO");
+    const today = new Date()
 
     try {
 
         const vacunacion: VacunacionesType | undefined = await selectVacunacion(mascota_id, vacuna_id);
 
         if(vacunacion !== undefined) {
-            const proxima = new Date(vacunacion.proxima_dosis).toLocaleDateString("es-CO");
-            if(proxima < today){
+            const proxima = new Date(vacunacion.proxima_dosis);
+            if (proxima > today) {
                 return res.json({
                     mensaje: "Esta mascota ya tiene esta vacuna y no ha pasado la fecha para la ultima dosis"
-                })
+                });
             }
         }
 

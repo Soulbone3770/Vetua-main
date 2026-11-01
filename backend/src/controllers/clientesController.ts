@@ -87,7 +87,7 @@ export const getClienteByParams = async(req: Request, res: Response) => {
 
         console.error(err);
 
-        res.json({
+        res.status(500).json({
             ok: false,
             error: err instanceof Error ? err.message : "Hubo un error al obtener el cliente"
         });
@@ -150,7 +150,7 @@ export const updateClienteInformacion = async(req: Request, res: Response) => {
 
         console.error(err);
 
-        res.status(500).send({
+        res.status(500).json({
             ok: false,
             error: err instanceof Error ? err.message : "Hubo un error al actualizar la información del cliente"
         });

@@ -5,7 +5,6 @@ import {selectIdMascotaByNombreAndPropietario} from "../models/mascotasModel.js"
 import type {Request, Response} from "express";
 import type {ClienteType} from "../types/ClienteType.js";
 import type {MascotaType} from "../types/MascotaType.js";
-import Consultas from "../routes/consultas.js";
 
 export const registerConsulta = async(req: Request, res: Response) => {
 

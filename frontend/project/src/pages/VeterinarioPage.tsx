@@ -24,11 +24,6 @@ const VeterinarioPage = () => {
                 boton="Buscar cliente" ruta="/veterinarioPage/veterinarioBuscarCliente" color="#3B5BB5"
             />
             <TarjetaAccion
-                titulo="Crear receta"
-                texto="Haz click en el botón para crear una nueva receta médica, esta se la podrás asignar a la mascota de un cliente. Las recetas las podrás visualizar en el apartado de consultar registros médicos."
-                boton="Crear receta" ruta="/veterinarioPage/veterinarioCrearReceta" color="#7B4FC9"
-            />
-            <TarjetaAccion
                 titulo="Registrar vacuna"
                 texto="Haz click en el botón para registrar la aplicación de una vacuna a la mascota de un cliente, con la fecha de aplicación y la fecha de la próxima dosis."
                 boton="Registrar vacuna" ruta="/veterinarioPage/veterinarioVacunaciones" color="#2F7D6B"
